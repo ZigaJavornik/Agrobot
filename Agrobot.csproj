@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AgrobotV2</RootNamespace>
+  </PropertyGroup>
+
+<ItemGroup>
+  <PackageReference Include="Emgu.CV" Version="4.7.0.5276" />
+  <PackageReference Include="Emgu.CV.Bitmap" Version="4.7.0.5276" />
+  
+  <!-- Always include Emgu.CV runtime libraries for 64-bit Windows -->
+  <PackageReference Include="Emgu.CV.runtime.windows" Version="4.7.0.5276" />
+  
+  <!-- Always include Emgu.CV runtime libraries for 32-bit Linux -->
+  <PackageReference Include="Emgu.CV.runtime.debian-arm" Version="4.7.0.5276" />
+  
+  <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
+  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+</ItemGroup>
+
+<!-- Copying the haar cascade file to the root of the executable foler -->
+<ItemGroup>
+  <None Update="haarcascade_frontalcatface.xml">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
+
+</Project>
