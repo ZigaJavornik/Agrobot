@@ -204,12 +204,14 @@ public class CameraService : ICameraService, IDisposable
     {
         // video capture can't be null, since the event is invoked by the VideoCapture object
         this.videoCapture!.Retrieve(this.imageFrame);
+        if (this.objectDetection != null)
+        {
+            this.objectDetection.Detect(this.imageFrame);
+        }
 
+        // Invoke the new frame received event
         this.FrameReceived?.Invoke(this, new FrameReceivedEventArgs(this.imageFrame.ToByteArray()));
     }
-
-
-
     #endregion
 }
 

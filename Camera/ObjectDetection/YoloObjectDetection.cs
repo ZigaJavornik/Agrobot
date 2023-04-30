@@ -23,4 +23,9 @@ public class YoloObjectDetecion : IObjectDetection
     {
         throw new NotImplementedException();
     }
+
+    public bool Detect(IInputOutputArray imageFrame)
+    {
+        throw new NotImplementedException();
+    }
 }

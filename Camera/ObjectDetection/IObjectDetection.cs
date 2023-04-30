@@ -19,7 +19,6 @@ public interface IObjectDetection : IDisposable
     /// Detects the image
     /// </summary>
     /// <param name="imageFrame"> Frame that should be checked for image detection </param>
-    /// <param name="resultImage"> Image with detected objects </param>
-    public bool Detect(Mat imageFrame, out Mat resultImage);
+    public bool Detect(IInputOutputArray imageFrame);
 
 }
