@@ -1,9 +1,9 @@
 using Emgu.CV;
 using System.Runtime.InteropServices;
-using AgrobotV2.Camera;
-using AgrobotV2.Camera.ObjectDetection;
+using Agrobot.Camera;
+using Agrobot.Camera.ObjectDetection;
 
-namespace AgrobotV2;
+namespace Agrobot;
 public static class ApiStartup
 {
     private static WebApplicationBuilder? builder;
@@ -28,7 +28,7 @@ public static class ApiStartup
         {
             
             loggerLocal.LogInformation($"detected system is Windows. Setting parameters for DShow...");
-            builder.Services.AddTransient<CameraService>(_ =>
+            builder.Services.AddSingleton<ICameraService>(_ =>
                 new CameraService(0, VideoCapture.API.DShow,  1280, 720, 50, logger)
                 {
                     ObjectDetectionMode = ObjectDetectionMode.CascadeClassifier,
@@ -37,7 +37,7 @@ public static class ApiStartup
         else if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             loggerLocal.LogInformation($"detected system is Linux.Setting parameters for V4L2...");
-            builder.Services.AddTransient<CameraService>(_ =>
+            builder.Services.AddSingleton<ICameraService>(_ =>
                 new CameraService(0, VideoCapture.API.V4L2,  1280, 720, 50, logger));
         }    
 

@@ -1,10 +1,10 @@
 using System.Drawing;
-using AgrobotV2.Camera.ObjectDetection;
+using Agrobot.Camera.ObjectDetection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 
-namespace AgrobotV2.Camera;
+namespace Agrobot.Camera;
 
 
 

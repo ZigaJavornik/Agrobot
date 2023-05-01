@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.Features;
 using System.Text;
-using AgrobotV2.Camera;
+using Agrobot.Camera;
+using Agrobot.Camera.ObjectDetection;
+using Agrobot.Helper;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 [ApiController]
 [Route("[controller]")]
@@ -9,17 +13,50 @@ public class CameraController : ControllerBase
 {
     #region Fields
     private readonly ILogger<CameraController> _logger;
-    private readonly CameraService _camera;
+    private readonly ICameraService _camera;
 
 
     #endregion
-    public CameraController(ILogger<CameraController> logger, CameraService camera)
+    public CameraController(ILogger<CameraController> logger, ICameraService camera)
     {
         _logger = logger;
         _camera = camera;
     }
 
-    [HttpGet(Name = "GetVideo")]
+    /// <summary>
+    /// Get a list of supported modes for the camera as an array of items
+    /// </summary>
+    [HttpGet("GetSupportedModes", Name = "SupportedCameraModes")]
+    [ProducesResponseType(typeof(ObjectDetectionMode), StatusCodes.Status200OK)]
+    public IActionResult SupportedCameraModes()
+    {
+
+        return Ok((Enum.GetValues(typeof(ObjectDetectionMode))));
+    }
+
+    [HttpPut("SetMode", Name = "SetCameraMode")]
+    public IActionResult SetCameraMode(string mode)
+    {
+        try
+        {
+            var desMode = JsonConvert.DeserializeObject<ObjectDetectionMode>(mode).ToString();
+            _camera.ObjectDetectionMode = (ObjectDetectionMode)Enum.Parse(typeof(ObjectDetectionMode), desMode);
+        return Ok();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Exception in SetCameraMode: {ex}");
+            return BadRequest();
+        }
+    }
+
+    [HttpGet("GetMode", Name = "GetCameraMode")]
+    public IActionResult GetCameraMode()
+    {
+        return Ok(_camera.ObjectDetectionMode);
+    }
+
+    [HttpGet("VideoStream", Name = "GetVideo")]
     public void Get()
     {
 
@@ -56,6 +93,26 @@ public class CameraController : ControllerBase
 
         _camera.FrameReceived -= WriteFrame;
         _camera.Stop();
+    }
+
+    [HttpGet("enabled", Name = "CameraEnabled")]
+    public IActionResult CameraEnabled()
+    {
+        return new JsonResult(_camera.IsOpened);
+    }
+
+    [HttpPut("Start", Name = "StartCameraStream")]
+    public IActionResult StartCameraStream()
+    {
+        _camera.Start();
+        return Ok();
+    }
+
+    [HttpPut("Stop", Name = "StopCameraStream")]
+    public IActionResult StopCameraStream()
+    {
+        _camera.Stop();
+        return Ok();
     }
 
     private async void WriteFrame(object? sender, FrameReceivedEventArgs? e)

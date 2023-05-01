@@ -1,6 +1,6 @@
 using Emgu.Util;
 
-namespace AgrobotV2.Camera;
+namespace Agrobot.Camera;
 
 public class CameraExceptionHandler : ExceptionHandler
 {

@@ -2,7 +2,7 @@ using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
 
-namespace AgrobotV2.Camera.ObjectDetection;
+namespace Agrobot.Camera.ObjectDetection;
 
 public class CascadeClasifierObjectDetection : IObjectDetection
 {
@@ -11,7 +11,11 @@ public class CascadeClasifierObjectDetection : IObjectDetection
         get;
         private set;
     }
-    public string FilePath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string FilePath 
+    { 
+        get;
+        set;
+    } = string.Empty;
 
     private CascadeClassifier cascadeClassifier;
 

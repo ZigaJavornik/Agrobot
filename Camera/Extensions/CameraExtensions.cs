@@ -1,9 +1,10 @@
 
+using Agrobot.Camera.ObjectDetection;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 
-namespace AgrobotV2.Camera;
+namespace Agrobot.Camera;
 
 ///<summary>
 /// Extension methods for <see cref="VideoCapture"/>

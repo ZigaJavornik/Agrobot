@@ -18,6 +18,8 @@
   <PackageReference Include="Emgu.CV.runtime.debian-arm" Version="4.7.0.5276" />
   
   <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
+  
+  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 </ItemGroup>
 

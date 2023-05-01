@@ -1,5 +1,5 @@
 using System.Drawing;
-using AgrobotV2.Camera.ObjectDetection;
+using Agrobot.Camera.ObjectDetection;
 public interface ICameraService
 {
     /// <summary>

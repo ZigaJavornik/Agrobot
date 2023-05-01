@@ -1,4 +1,7 @@
-namespace AgrobotV2.Camera.ObjectDetection;
+using System.Text.Json.Serialization;
+
+namespace Agrobot.Camera.ObjectDetection;
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ObjectDetectionMode
 {
     /// <summary>

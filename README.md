@@ -1,4 +1,4 @@
-# AgrobotV2
+# Agrobot
 
 Agriculture robot implementation using a Raspberry Pi (Model 4B). Using 32 bit Raspberian - Debian Bullseye at the time of making.
 

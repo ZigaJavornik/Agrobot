@@ -1,6 +1,6 @@
 using Emgu.CV;
 
-namespace AgrobotV2.Camera.ObjectDetection;
+namespace Agrobot.Camera.ObjectDetection;
 
 public class YoloObjectDetecion : IObjectDetection
 {
